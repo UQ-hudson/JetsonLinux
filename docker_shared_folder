@@ -1,0 +1,30 @@
+####docker container와 Jetson Linux간 공유폴더 만들기####
+1. host에 공유 폴더 만들기
+mkdir -p ~/host_shared
+
+2. container내부에 공유 폴더 만들기
+cd /mnt/
+mkdir host_shared
+
+3. Docker 실행명령어에 -v ~/host_shared:/host_shared 구문 추가하기
+
+if [ $ARCH = "aarch64" ]; then
+
+        # /proc or /sys files aren't mountable into docker
+        cat /proc/device-tree/model > /tmp/nv_jetson_model
+
+        sudo docker run --runtime nvidia -it --rm \
+                --network host \
+                -v /tmp/argus_socket:/tmp/argus_socket \
+                -v /etc/enctune.conf:/etc/enctune.conf \
+                -v /etc/nv_tegra_release:/etc/nv_tegra_release \
+                -v /tmp/nv_jetson_model:/tmp/nv_jetson_model \
+                -v /var/run/dbus:/var/run/dbus \
+                -v ~/host_shared:/host_shared \
+                -v /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket \
+                -w $DOCKER_ROOT \
+
+4. 도커 실행 후 컨테이너 내부에서 파일 복사
+cp /경로/my_image.jpg /host_shared/
+
+5. host OS에서 복사된 파일 확인 가능
