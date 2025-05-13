@@ -1,0 +1,27 @@
+포럼에서는 아래와 같이 가이드 -> Jetson Zoo를 이용
+https://forums.developer.nvidia.com/t/onnxruntime-jetpack-6-0-jetson-orin-nx/298580
+
+Jetson의 Jetpack에 맞는 onnxruntime whl을 이용하여 설치해야 함. 저는 Jetpack 6.0을 쓰고 있음.
+ 
+아래 링크에서 onnxruntime 용 whl파일을 제공.
+https://elinux.org/Jetson_Zoo#ONNX_Runtime
+아래와 같이 onnxrumtime1.17.0의 링크주소를 복사하기. Jetpack 6.0에 파이썬 버전에 맞는 이미지는 1.17.0
+ 
+wget으로 다운로드
+$ wget https://nvidia.box.com/shared/static/i7n40ki3pl2x57vyn4u7e9asyiqlnl7n.whl
+
+아래와 같이 L4T에서는 휠 이름이 이상하게 나오는데 install onnxruntime_gpu-1.17.0-cp310-cp310-linux_aarch64 이런식으로 바꿔야 함.
+ 
+
+Window PC 크롬에서는 아래와 같이 제대로된 이름확인이 가능
+ 
+
+이후 아래와 같이 설치
+$ pip3 install onnxruntime_gpu-1.17.0-cp310-cp310-linux_aarch64.whl
+$ pip3 install "numpy<2.0" --force-reinstall
+
+check_onnx_device.py를 작성하여 status를 확인하면 아래와 같이 GPU로 나오면 정상설치 된 것임.
+ 
+import onnxruntime as ort
+
+print("ONNX Runtime is using:", ort.get_device())
