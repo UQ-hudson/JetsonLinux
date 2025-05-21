@@ -25,3 +25,16 @@ check_onnx_device.py를 작성하여 status를 확인하면 아래와 같이 GPU
 import onnxruntime as ort
 
 print("ONNX Runtime is using:", ort.get_device())
+
+
+#Jetpack6.2에서 설치 명령어 정리
+$ wget https://pypi.jetson-ai-lab.dev/jp6/cu126/+f/869/e41abdc35e093/onnxruntime_gpu-1.22.0-cp310-cp310-linux_aarch64.whl
+$ pip3 install onnxruntime_gpu-1.22.0-cp310-cp310-linux_aarch64.whl
+$ echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc
+$ source ~/.bashrc
+$ python3 -c "import onnxruntime; print(onnxruntime.get_device())"
+$ pip install numpy==1.26.4 --force-reinstall
+$ python3 -c "import onnxruntime; print(onnxruntime.get_device())"
+$ python3 -c "import onnxruntime; print(onnxruntime.__version__)"
+$ jetson_release
+$ jtop
