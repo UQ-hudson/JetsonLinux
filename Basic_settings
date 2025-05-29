@@ -1,5 +1,12 @@
+sudo apt-get update
+sudo apt-get upgrade
+
 ####jetpack 설치방법####
 sudo apt install nvidia-jetpack
+
+####jetson-stats 설치####
+sudo apt-get install python3-pip
+sudo -H pip install -U jetson-stats
 
 ####Jetson Linux Docker 설정####
 sudo apt-get install -y nvidia-container-toolkit
